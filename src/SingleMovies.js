@@ -1,52 +1,22 @@
 import React,{useState,useEffect} from "react";
 import { useParams } from "react-router-dom";
-import { useGlobalContextHook } from "./Context";
-import { API_URL } from "./Context";
 import "./singlemovie.css"
+import axiosinstance from "./axiosinstance";
 const SingleMovies = () => {
 
   const { id } = useParams();
-
-  // const [isLoading, setLoading] = useState(true);
   const [movie, setMovie] = useState("");
 
-
-  useEffect(() => {
-    let timeout = setTimeout(() => {
-      getData(`${API_URL}&i=${id}`);
-    }, 500);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [id]);
-
-  const getData = async (url) => {
-    // isLoading(true);
-    try {
-      // console.log(url);
-      const respose = await fetch(url);
-      const res = await respose.json();
-      console.log(res);
-      if (res.Response == "True") { 
-        setMovie(res);
-        // console.log(res.Search);
-        setLoading(false);
-        setError({
-          show: false,
-          msg: "",
-        });
-      } else {
-        setError({
-          show: true,
-          msg: data.Error,
-        });
-      }
-    } catch (err) {
-      console.log("Error Ocured " + err);
-    }
-  };
-
-  console.log(id);
+useEffect(() => {
+  axiosinstance
+    .get(`?apikey=21f00cb7&i=${id}`)
+    .then((response) => {
+      setMovie(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
 
   return (
     <div>
@@ -56,7 +26,7 @@ const SingleMovies = () => {
             <div className="movie-img-holder left">
               <img src={movie.Poster} alt={movie.Country}/>
             </div>
-            <div className="right">
+            <div className="single-movie-right">
               <h4><span>Title of the Movie </span>: {movie.Title}</h4>
               <h4><span>Director</span> : {movie.Director}</h4>
               <h4><span>Country </span>: {movie.Country}</h4>

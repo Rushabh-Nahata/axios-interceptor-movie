@@ -1,34 +1,36 @@
 .singlemovie{
-    width:60%;
-    margin: 80px auto;
-    padding: 100px auto;
+    width:80%;
+    height: 100vh;
+    margin: auto;
+    padding: 50px;
 }
 
 .singlemovie .mainbox{
     display:flex;
     flex-direction: row;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-self: center;
     text-align: center;
-    border: 10px solid blue;
+    /* border: 10px solid blue; */
 }
-.mainbox .right{
+.single-movie-right{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-self: center;
     gap:1.5rem;
-    color: rgb(42, 18, 255);
+    color: rgb(245, 245, 245);
 }
 
-.mainbox .right span{
-color: red;
+ .single-movie-right span{
+color: rgb(92, 255, 141);
 }
 
 .movie-img-holder {
     position: relative;
     overflow: hidden;
-    max-width: 300px;
+    max-width: 250px;
     z-index: 1;
   }
   .movie-img-holder::after {
